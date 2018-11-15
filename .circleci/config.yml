@@ -26,14 +26,11 @@ jobs:
       
       # middleman build
       - run:
-          #command: |
-          #  bundle exec middleman build
-          #  ./scripts/deploy.sh
           command: pwd && ls -lah 
 
 workflows:
   version: 2
-  build-website:
+  build-the-website:
     jobs:
       - build-website:
           filters:
