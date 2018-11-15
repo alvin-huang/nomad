@@ -26,7 +26,7 @@ jobs:
       
       # middleman build
       - run:
-          command: pwd && ls -lah 
+          command: pwd && ls -lah && echo "hello world" 
 
 workflows:
   version: 2
