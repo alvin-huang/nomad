@@ -1,38 +1,20 @@
 version: 2
 jobs:
-  build-website:
-    working_directory: ~/project/website
+  build_blah:
     docker:
-      - image: hashicorp/middleman-hashicorp:0.3.35
+      - image: alpine:latest
     steps:
-      - checkout:
-          path: ~/project
-
-      - run:
-          name: bundler version
-          command: bundle -v 
-      
-      #cache gems
-      - restore_cache:
-          key: alvintest-gems-v1-website-{{ checksum "Gemfile.lock" }}
-
-      - run:
-          command: bundle check || bundle install 
-      
-      - save_cache:
-          key: alvintest-gems-v1-website-{{ checksum "Gemfile.lock" }}
-          paths:
-            - ~/project/website/vendor/bundle
-      
-      # middleman build
-      - run:
-          command: pwd && ls -lah && echo "hello world" 
-
+      - checkout
+      - run: echo "build"
+  test:
+    docker:
+      - image: alpine:latest
+    steps:
+      - checkout
+      - run: echo "test"
 workflows:
   version: 2
-  build-the-website:
+  build_and_test:
     jobs:
-      - build-website:
-          filters:
-            branches:
-              only: stable-website
+      - build_blah
+      - test
